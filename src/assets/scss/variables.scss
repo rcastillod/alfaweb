@@ -1,0 +1,40 @@
+/* ------ Colors ------ */
+
+// Primary Color
+$primary-color: #16294E;
+$secondary-color: #7DDFDF;
+$text-color: #576172;
+
+/* ------ Fonts ------ */
+
+// Families
+$text-ff: 'Merriweather', sans-serif;
+$heading-ff: 'Jost', sans-serif;
+
+// Weights
+$text-fw: (
+    'thin': 100,
+    'extra-light': 200,
+    'light': 300,
+    'medium': 500,
+);
+    
+$heading-fw: (
+    'semibold': 600,
+    'regular': 400,
+    'thin': 100
+);
+
+/* ------ Breakpoints ------ */
+
+$breakpoints: (
+    'small': 576px,
+    'medium': 768px,
+    'large': 992px,
+    'xl': 1200px,
+);
+
+/* ------ Border ------ */
+
+// Radius
+$br: 1.875rem;
