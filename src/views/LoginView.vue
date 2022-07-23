@@ -33,7 +33,5 @@ export default {
 </script>
 
 <style scoped>
-    section {
-        height: 100%;
-    }
+    
 </style>

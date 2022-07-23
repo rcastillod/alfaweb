@@ -1,8 +1,18 @@
 <template>
-    <h1>Registro</h1>
+    <section class="register">
+        <v-container fill-height>
+            <v-row justify="center">
+                <v-col cols="12" sm="6" md="4" lg="4" xl="3">
+                    <register-form></register-form>
+                </v-col>
+            </v-row>
+        </v-container>
+    </section>
 </template>
 
 <script>
+import RegisterForm from '@/components/RegisterForm.vue'
+
 export default {
     name: 'register-view',
     // props: {},
@@ -12,7 +22,9 @@ export default {
     // computed: {},
     //methods: {}
     // watch: {},
-    // components: {},
+    components: {
+        'register-form': RegisterForm
+    },
     // mixins: [],
     // filters: {},
     // -- Lifecycle Methods

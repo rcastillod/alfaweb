@@ -1,6 +1,6 @@
 <template>
     <v-card class="py-8 px-6">
-        <h2 class="text-h4 text-center">Login</h2>
+        <h2 class="text-h4 text-center">Registro</h2>
         <v-alert
             :value="alertError"
             color="red"
@@ -33,27 +33,27 @@
             <v-btn
                 color="success"
                 class="mr-4"
-                @click="login"
+                @click="register"
             >
-                Ingresar
+                Registrar
             </v-btn>
             <v-divider class="my-5"></v-divider>
             <div class="log-link d-flex justify-center text-body-2 font-weight-light">
-                ¿Aun no tienes una cuenta?
+                ¿Ya tienes una cuenta?
                 <a 
                     class="font-weight-medium ml-1"
-                    @click="toRegister"    
-                >Regístrate</a>
+                    @click="toLogin"    
+                >Iniciar Sesión</a>
             </div>
         </v-form>
     </v-card>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 
 export default {
-    name: 'login-form',
+    name: 'register-form',
     // props: {},
     data: function(){
         return {
@@ -74,12 +74,13 @@ export default {
     },
     // computed: {},
     methods: {
-        ...mapActions(['loginAction']),
-        login() {
-            this.loginAction({correo: this.correo, password: this.password})
+        ...mapActions(['registerAction']),
+        register() {
+            this.registerAction({correo: this.correo, password: this.password})
+            this.$router.push('/')
         },
-        toRegister() {
-            this.$router.push('/register')
+        toLogin() {
+            this.$router.push('/login')
         }
     }
     // watch: {},
