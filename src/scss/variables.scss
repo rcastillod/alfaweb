@@ -8,7 +8,7 @@ $text-color: #576172;
 /* ------ Fonts ------ */
 
 // Families
-$text-ff: 'Merriweather', sans-serif;
+$text-ff: 'Roboto', sans-serif;
 $heading-ff: 'Jost', sans-serif;
 
 // Weights
@@ -38,3 +38,10 @@ $breakpoints: (
 
 // Radius
 $br: 1.875rem;
+
+
+/* ------ Vuetify Global's ------ */
+$body-font-family: $text-ff;
+$heading-font-family: $heading-ff;
+
+@import '~vuetify/src/styles/styles.sass';
