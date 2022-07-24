@@ -1,7 +1,10 @@
 const getters = {
 
     getUserEmail(state) {
-        return state.user.email
+        if ( state.user != null ) {
+            return state.user.user.email
+        }
+        return null
     }
 
 }

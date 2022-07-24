@@ -23,20 +23,19 @@
 
         <v-spacer></v-spacer>
 
+        <!-- FIXME: Solucionar error de email de usuario -->
+        <div class="text-body-2">Bienvenido {{ getUserEmail }}</div>
         <v-btn  
             text
             @click="logOut"
         >
-            <span class="mr-2">
-                Cerrar Sesión
-            </span>
             <v-icon>mdi-exit-to-app</v-icon>
         </v-btn>
     </v-app-bar>
 </template>
 
 <script>
-import { getAuth, signOut } from "firebase/auth";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     name: 'nav-bar',
@@ -44,18 +43,14 @@ export default {
     data: function(){
         return {}
     },
-    // computed: {},
+    computed: {
+        ...mapGetters(['getUserEmail'])
+    },
     methods: {
-        async logOut() {
-            const auth = getAuth();
-
-            try {
-                await signOut(auth)
-                this.$router.push('/login')
-            }
-            catch(error) {
-                console.log(error)
-            }
+        ...mapActions(['logoutAction']),
+        logOut() {
+            this.logoutAction()
+            .then(() => this.$router.push('/login'))
         }
     }
     // watch: {},
