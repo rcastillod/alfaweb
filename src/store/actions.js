@@ -2,10 +2,10 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 
 const actions = {
     
-    async registerAction({commit}, payload) {    
+    async registerAction({commit}, userData) {    
         const auth = getAuth()
         try{
-            let respReg = await createUserWithEmailAndPassword(auth, payload.correo, payload.password)
+            let respReg = await createUserWithEmailAndPassword(auth, userData.correo, userData.password)
             commit('SET_USER', respReg)
         }
         catch(error) {
@@ -13,10 +13,10 @@ const actions = {
         }
         
     },
-    async loginAction({commit}, payload) {
+    async loginAction({commit}, userData) {
         const auth = getAuth()
         try {
-            let respLog = await signInWithEmailAndPassword(auth, payload.correo, payload.password)
+            let respLog = await signInWithEmailAndPassword(auth, userData.correo, userData.password)
             commit('SET_USER', respLog)
         }
         catch(error) {

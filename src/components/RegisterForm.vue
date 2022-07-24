@@ -77,7 +77,7 @@ export default {
         ...mapActions(['registerAction']),
         register() {
             this.registerAction({correo: this.correo, password: this.password})
-            this.$router.push('/')
+            .then(() => this.$router.push('/'))
         },
         toLogin() {
             this.$router.push('/login')
