@@ -1,4 +1,6 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from  '@/firebase/firebase.js'
 
 const actions = {
     
@@ -31,6 +33,19 @@ const actions = {
         }
         catch(error) {
             commit('SET_USER_ERROR', error.message)
+        }
+    },
+
+    async fetchCoursesAction({commit}) {
+        try {
+            const querySnapshot = await getDocs(collection(db, 'cursos'))
+            querySnapshot.forEach((doc) => {
+                console.log(doc.id, " => ", doc.data() )
+                commit('SET_COURSES', doc)
+            })
+        }
+        catch(error) {
+            console.log(error)
         }
     }
 

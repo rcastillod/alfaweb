@@ -3,7 +3,7 @@
 // Primary Color
 $primary-color: #16294E;
 $secondary-color: #7DDFDF;
-$text-color: #576172;
+$text-color: #697286;
 
 /* ------ Fonts ------ */
 
@@ -11,28 +11,6 @@ $text-color: #576172;
 $text-ff: 'Roboto', sans-serif;
 $heading-ff: 'Jost', sans-serif;
 
-// Weights
-$text-fw: (
-    'thin': 100,
-    'extra-light': 200,
-    'light': 300,
-    'medium': 500,
-);
-    
-$heading-fw: (
-    'semibold': 600,
-    'regular': 400,
-    'thin': 100
-);
-
-/* ------ Breakpoints ------ */
-
-$breakpoints: (
-    'small': 576px,
-    'medium': 768px,
-    'large': 992px,
-    'xl': 1200px,
-);
 
 /* ------ Border ------ */
 
@@ -43,5 +21,8 @@ $br: 1.875rem;
 /* ------ Vuetify Global's ------ */
 $body-font-family: $text-ff;
 $heading-font-family: $heading-ff;
+$container-max-widths: (
+    'xl': 1320px
+);
 
 @import '~vuetify/src/styles/styles.sass';

@@ -4,12 +4,10 @@ import VuexPersist from 'vuex-persist'
 import mutations from './mutations'
 import actions from './actions'
 import getters from './getters'
-import { db } from  '@/firebase/firebase.js'
-db
-// import { collection, getDocs } from "firebase/firestore";
-//import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 Vue.use(Vuex)
+
+// Vuex persist config
 const vuexLocalStorage = new VuexPersist({
   key: 'vuex',
   reducer: (state) => ({user: state.user}),
@@ -19,7 +17,8 @@ const vuexLocalStorage = new VuexPersist({
 export default new Vuex.Store({
   state: {
     user: null,
-    userError: null
+    userError: null,
+    courses: []
   },
   getters: getters,
   mutations: mutations,

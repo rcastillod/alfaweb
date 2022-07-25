@@ -28,8 +28,20 @@ export default {
 </script>
 
 <style lang="scss">
+body .theme--light.v-sheet,
+body .theme--light.v-application {
+  color: $text-color !important;
+}
 .login,
 .register {
     height: 100%;
+}
+/** Divider */
+.divider {
+  background-color: $secondary-color;
+  display: block;
+  margin-bottom: 3.125rem;
+  height: .4375rem;
+  width: 3.125rem;
 }
 </style>
