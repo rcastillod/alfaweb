@@ -1,7 +1,7 @@
 <template>
     <v-card
-        :loading="loading"
-        class="mx-auto my-12"
+        class="course-card mx-auto my-12"
+        elevation="0"
         max-width="374"
     >
         <template slot="progress">
@@ -17,62 +17,53 @@
             :src="imagen"
         ></v-img>
 
-        <v-card-title>{{curso}}</v-card-title>
+        <v-card-title class="text-h6 text--primary">{{curso}}</v-card-title>
 
         <v-card-text>
-        <v-row
-            align="center"
-            class="mx-0"
-        >
-            <v-rating
-            :value="4.5"
-            color="amber"
-            dense
-            half-increments
-            readonly
-            size="14"
-            ></v-rating>
-
-            <div class="grey--text ms-4">
-            4.5 (413)
+            <div class="mt-0 mb-4 text-subtitle-1">
+                <span class="secondary--text text--darken-3">$ {{costo}}</span> - Duración {{duracion}}
             </div>
-        </v-row>
-
-        <div class="my-4 text-subtitle-1">
-            $ • Italian, Cafe
-        </div>
-
-        <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+            <div>{{descripcion}}</div>
         </v-card-text>
 
         <v-divider class="mx-4"></v-divider>
 
-        <v-card-title>Tonight's availability</v-card-title>
-
         <v-card-text>
-        <v-chip-group
-            v-model="selection"
-            active-class="deep-purple accent-4 white--text"
-            column
-        >
-            <v-chip>5:30PM</v-chip>
-
-            <v-chip>7:30PM</v-chip>
-
-            <v-chip>8:00PM</v-chip>
-
-            <v-chip>9:00PM</v-chip>
-        </v-chip-group>
+            <v-chip-group
+                column
+            >
+                <v-chip
+                    class="ma-2"
+                    color="primary"
+                    text-color="white"
+                >
+                    <v-avatar
+                        left
+                        class="primary lighten-3"
+                    >
+                        {{cupos}}
+                    </v-avatar>
+                    Cupos
+                </v-chip>
+                <v-chip
+                    class="ma-2"
+                    color="secondary"
+                    text-color="primary"
+                >
+                    <v-avatar
+                        left
+                        class="secondary darken-3"
+                        color="white"
+                    >
+                        {{inscritos}}
+                    </v-avatar>
+                    Inscritos
+                </v-chip>
+            </v-chip-group>
         </v-card-text>
 
         <v-card-actions>
-        <v-btn
-            color="deep-purple lighten-2"
-            text
-            @click="reserve"
-        >
-            Reserve
-        </v-btn>
+        
         </v-card-actions>
     </v-card>
 </template>
@@ -90,6 +81,10 @@ export default {
             required: true
         },
         curso: {
+            type: String,
+            required: true
+        },
+        descripcion: {
             type: String,
             required: true
         },
@@ -120,8 +115,7 @@ export default {
     },
     data: function(){
         return {
-            loading: false,
-            selection: 1,
+            
         }
     },
     // computed: {},
@@ -140,6 +134,14 @@ export default {
 }
 </script>
 
-<style scoped>
-    
+<style scoped lang="scss">
+.course-card {
+    border-radius: 7px;
+    box-shadow: 0 10px 20px rgba($text-color, .1) !important;
+    transition: all 300ms ease-in;
+    &:hover,
+    &:focus {
+        box-shadow: 0 10px 40px rgba($text-color, .3) !important;
+    }
+}
 </style>

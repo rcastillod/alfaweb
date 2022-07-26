@@ -9,13 +9,15 @@
             <v-container>
                 <v-row align="center">
                     <div class="d-flex align-center">
-                        <v-img 
-                            alt="Vuetify Logo" 
-                            class="shrink mr-2" 
-                            contain
-                            src="../assets/img/logo.svg" 
-                            transition="scale-transition"
-                            width="230" />
+                        <a @click="toHome()">
+                            <v-img
+                                alt="Vuetify Logo" 
+                                class="shrink mr-2" 
+                                contain
+                                src="../assets/img/logo.svg" 
+                                transition="scale-transition"
+                                width="230" />
+                        </a>
                     </div>
             
                     <v-spacer></v-spacer>
@@ -39,7 +41,7 @@
         </v-app-bar>
         <v-navigation-drawer 
             v-model="drawer"
-            absolute 
+            fixed 
             right 
             temporary>
             <v-list-item>
@@ -62,15 +64,27 @@
                 <v-list-item
                 v-for="route in routes"
                 :key="route.title"
+                @click="redirectTo(route.name)"
+                :disabled="currentRoute==route.name"
                 link
                 >
-                <v-list-item-icon>
-                    <v-icon>{{ route.icon }}</v-icon>
-                </v-list-item-icon>
-
-                <v-list-item-content>
-                    <v-list-item-title>{{ route.title }}</v-list-item-title>
-                </v-list-item-content>
+                    <v-list-item-icon>
+                        <v-icon>{{ route.icon }}</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ route.title }}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item
+                @click="logOut()"
+                link
+                >
+                    <v-list-item-icon>
+                        <v-icon>mdi-logout-variant</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>Cerrar Sesión</v-list-item-title>
+                    </v-list-item-content>
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
@@ -88,21 +102,29 @@ export default {
             drawer: false,
             group: null,
             routes: [
-                { title: 'Cursos', icon: 'mdi-book-open-outline' },
-                { title: 'Photos', icon: 'mdi-image' },
-                { title: 'About', icon: 'mdi-help-box' },
+                { title: 'Home', icon: 'mdi-home-variant-outline', name: 'home' },
+                { title: 'Cursos', icon: 'mdi-book-open-outline', name: 'courses' },
             ],
         }
     },
     computed: {
-        ...mapGetters(['getUserEmail'])
+        ...mapGetters(['getUserEmail']),
+        currentRoute(){
+            return this.$route.name
+        }
     },
     methods: {
         ...mapActions(['logoutAction']),
         logOut() {
             this.logoutAction()
             .then(() => this.$router.push('/login'))
-        }
+        },
+        toHome() {
+            this.$router.push('/')
+        },
+        redirectTo(nameRoute){
+            this.$router.push({name:nameRoute})
+        },
     },
     watch: {
         group () {

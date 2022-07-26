@@ -1,6 +1,6 @@
 <template>
     <section class="courses">
-        <div class="courses-heading-title py-5">
+        <div class="heading-title py-5">
             <v-container>
                 <h3 class="text-h5 text-uppercase">Cursos Disponibles</h3>
             </v-container>
@@ -16,6 +16,7 @@
                             :id="course.id"
                             :imagen="course.imagen"
                             :curso="course.curso"
+                            :descripcion="course.descripcion"
                             :cupos="course.cupos"
                             :inscritos="course.inscritos"
                             :duracion="course.duracion"
@@ -58,12 +59,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.courses {
-    background-color: #F6FAFF;
-}
-.courses-heading-title {
-    background-color: #ffffff;
-    border-bottom: 1px solid rgba($text-color, .2);
-    border-top: 1px solid rgba($text-color, .2);
-}
 </style>

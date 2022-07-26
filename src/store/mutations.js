@@ -12,6 +12,7 @@ const mutations = {
             id: course.id,
             imagen: course.data().imagen,
             curso: course.data().curso,
+            descripcion: course.data().descripcion,
             cupos: course.data().cupos,
             inscritos: course.data().inscritos,
             duracion: course.data().duracion,

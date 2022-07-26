@@ -18,7 +18,8 @@ export default new Vuex.Store({
   state: {
     user: null,
     userError: null,
-    courses: []
+    courses: [],
+    loader: true
   },
   getters: getters,
   mutations: mutations,

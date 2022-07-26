@@ -40,7 +40,6 @@ const actions = {
         try {
             const querySnapshot = await getDocs(collection(db, 'cursos'))
             querySnapshot.forEach((doc) => {
-                console.log(doc.id, " => ", doc.data() )
                 commit('SET_COURSES', doc)
             })
         }

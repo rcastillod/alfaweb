@@ -8,7 +8,7 @@
 <script>
 import HeroSection from '@/components/HeroSection.vue'
 import CoursesSection from '@/components/CoursesSection.vue'
-import { mapActions } from 'vuex'
+//import { mapActions } from 'vuex'
 
   export default {
     name: 'home-view',
@@ -18,10 +18,10 @@ import { mapActions } from 'vuex'
       'courses-section': CoursesSection
     },
     methods: {
-      ...mapActions(['fetchCoursesAction'])
+      //...mapActions(['fetchCoursesAction'])
     },
     created() {
-      this.fetchCoursesAction()
+      //this.fetchCoursesAction()
     }
   }
 </script>

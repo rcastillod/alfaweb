@@ -1,13 +1,14 @@
 <template>
   <v-app>
     <nav-bar v-if="isPrivateRoute"></nav-bar>
-    <v-main>
+    <v-main class="pt-2 pt-md-16">
       <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import NavBar from './components/NavBar.vue';
 
 export default {
@@ -17,19 +18,29 @@ export default {
 
   }),
   computed: {
+    ...mapState(['user']),
     isPrivateRoute() {
       return this.$route.meta.privateRoute
     }
   },
+  methods: {
+    ...mapActions(['fetchCoursesAction'])
+  },
   components: {
     'nav-bar': NavBar
-  }
+  },
+  created() {
+      if ( this.user != null ) {
+        this.fetchCoursesAction()
+      }
+    }
 };
 </script>
 
 <style lang="scss">
 body .theme--light.v-sheet,
 body .theme--light.v-application {
+  background-color: #F6FAFF;
   color: $text-color !important;
 }
 .login,
@@ -43,5 +54,11 @@ body .theme--light.v-application {
   margin-bottom: 3.125rem;
   height: .4375rem;
   width: 3.125rem;
+}
+/** Heading Title */
+.heading-title {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba($text-color, .2);
+    border-top: 1px solid rgba($text-color, .2);
 }
 </style>
