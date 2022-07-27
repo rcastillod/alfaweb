@@ -20,6 +20,7 @@ const mutations = {
             terminado: course.data().terminado,
             fecha: course.data().fecha,
         })
+        state.loader = false
     }
 
 }
