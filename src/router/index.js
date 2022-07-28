@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
   let private_route = to.meta.privateRoute
 
   if( private_route && !user ) {
-    next('/login')
+    next({name: 'login'})
   } else if( private_route == undefined && user ) {
     next('/')
   } else {

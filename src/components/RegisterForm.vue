@@ -1,8 +1,8 @@
 <template>
     <v-card 
-        class="form-card pa-5"
-        color="white"
-        elevation="20">
+        class="form-card py-10 px-5"
+        color="rgba(255,255,255,.2)"
+        elevation="0">
         <h2 class="text-h4 text-center primary--text">Registro</h2>
         <v-alert
             :value="alertError"
@@ -82,8 +82,14 @@ export default {
     methods: {
         ...mapActions(['registerAction']),
         register() {
-            this.registerAction({correo: this.correo, password: this.password})
-            .then(() => this.$router.push('/'))
+            this.$refs.form.validate()
+            if( this.valid == false ) {
+                this.alertError = true
+                this.alertMessage = 'Por favor ingresa todos los campos'
+            } else {
+                this.registerAction({correo: this.correo, password: this.password})
+                .then(() => this.$router.push('/'))
+            }
         },
         toLogin() {
             this.$router.push('/login')

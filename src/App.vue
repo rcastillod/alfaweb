@@ -53,6 +53,10 @@ body .theme--light.v-application {
   background-image: url('./assets/img/login-bg.png');
   background-size: cover;
   background-position: center center;
+  .form-card {
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 20px rgba($text-color, .1) !important;
+  }
 }
 .sign-link {
   cursor: pointer;

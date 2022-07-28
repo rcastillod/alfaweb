@@ -210,6 +210,12 @@
                         </v-data-table>
                     </v-col>
                 </v-row>
+                <v-row>
+                    <v-col>
+                        <h4 class="text--primary my-5">Información general</h4>
+                        <courses-info></courses-info>
+                    </v-col>
+                </v-row>
             </v-container>
         </div>
     </section>
@@ -217,6 +223,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import CoursesInfo from './CoursesInfo.vue'
 import { db } from  '@/firebase/firebase.js'
 import { doc, collection, addDoc, deleteDoc } from "firebase/firestore";
 
@@ -283,7 +290,10 @@ export default {
     }),
 
     computed: {
-        ...mapState(['courses', 'loader']),
+        ...mapState([
+            'courses', 
+            'loader', 
+        ]),
         getDate() {
             let date = new Date().toLocaleDateString()
             return date
@@ -366,6 +376,10 @@ export default {
             }
         },
     },
+
+    components: {
+        'courses-info': CoursesInfo
+    }
 }
 </script>
 

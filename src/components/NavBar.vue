@@ -118,6 +118,7 @@ export default {
         logOut() {
             this.logoutAction()
             .then(() => this.$router.push('/login'))
+            .catch((error) => console.log(error))
         },
         toHome() {
             this.$router.push('/')

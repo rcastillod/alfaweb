@@ -1,13 +1,14 @@
 <template>
     <v-card 
-        class="form-card pa-5"
-        color="white"
-        elevation="20">
+        class="form-card py-10 px-5"
+        color="rgba(255,255,255,.2)"
+        elevation="0">
         <h2 class="text-h4 text-center primary--text">Login</h2>
         <v-alert
             :value="alertError"
+            class="my-5"
             color="red"
-            icon="mdi-circle-outline"
+            icon="mdi-alert-circle-outline"
             outlined
             text
         >
@@ -56,7 +57,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
     name: 'login-form',
@@ -78,12 +79,18 @@ export default {
             ],
         }
     },
-    // computed: {},
+    computed: { ...mapState(['userError']) },
     methods: {
         ...mapActions(['loginAction']),
         login() {
-            this.loginAction({correo: this.correo, password: this.password})
-            .then(() => this.$router.push('/'))
+            this.$refs.form.validate()
+            if( this.valid == false ) {
+                this.alertError = true
+                this.alertMessage = 'Por favor ingresa todos los campos'
+            } else {
+                this.loginAction({correo: this.correo, password: this.password})
+                .then(() => this.$router.push('/'))
+            }
         },
         toRegister() {
             this.$router.push('/register')

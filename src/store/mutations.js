@@ -7,6 +7,10 @@ const mutations = {
         state.userError = payload
     },
 
+    CLEAN_COURSES(state) {
+        state.courses = []
+    },
+
     SET_COURSES(state, course) {
         state.courses.push({
             id: course.id,

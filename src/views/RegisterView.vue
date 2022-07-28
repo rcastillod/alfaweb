@@ -2,7 +2,7 @@
     <section class="register">
         <v-container fill-height>
             <v-row justify="center">
-                <v-col cols="12" sm="6" md="4" lg="4" xl="3">
+                <v-col cols="12" sm="6" md="4" lg="4">
                     <register-form></register-form>
                 </v-col>
             </v-row>

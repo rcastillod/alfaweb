@@ -39,6 +39,7 @@ const actions = {
     async fetchCoursesAction({commit}) {
         try {
             const querySnapshot = await getDocs(collection(db, 'cursos'))
+            commit('CLEAN_COURSES')
             querySnapshot.forEach((doc) => {
                 commit('SET_COURSES', doc)
             })
