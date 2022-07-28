@@ -31,7 +31,7 @@
                                     outlined
                                     text
                                 >
-                                    <div>Por favor ingresa todos los campos!</div>
+                                    <div>{{alertErrorMessage}}</div>
                                 </v-alert>
                                 <v-form
                                     v-model="valid"
@@ -58,7 +58,7 @@
                                             </v-col>
                                             <v-col cols="12" sm="6">
                                                 <v-text-field
-                                                    v-model="newCourseField.cupos"
+                                                    v-model.number="newCourseField.cupos"
                                                     :rules="cuposRules"
                                                     dense
                                                     label="Cupos"
@@ -69,7 +69,8 @@
                                             </v-col>
                                             <v-col cols="12" sm="6">
                                                 <v-text-field
-                                                    v-model="newCourseField.inscritos"
+                                                    v-model.number="newCourseField.inscritos"
+                                                    :rules="[ruleInscripcion]"
                                                     dense
                                                     label="Inscritos"
                                                     outlined
@@ -136,7 +137,7 @@
                     v-if="alertSuccess"
                     text 
                     type="success" 
-                    icon="mdi-account-check">
+                    icon="mdi-book-check-outline">
                     {{alertSuccessMessage}}
                 </v-alert>
                 <v-row>
@@ -150,33 +151,46 @@
                             loading-text="Cargando cursos... Por favor espere"
                         >
                             <template v-slot:top>
-                                <v-dialog v-model="dialogDelete" max-width="500px">
-                                    <v-card>
-                                        <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
+                                <v-dialog 
+                                    v-model="dialogDelete" 
+                                    max-width="500px"
+                                >
+                                    <v-card class="py-8">
+                                        <v-card-title class="text-h6 text--primary text-center">¿Estas seguro que deseas eliminar este curso?</v-card-title>
                                         <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                                        <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-                                        <v-spacer></v-spacer>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="blue darken-1" text @click="closeDelete">Cancelar</v-btn>
+                                            <v-btn color="blue darken-1" text @click="deleteCourseConfirm">Eliminar</v-btn>
+                                            <v-spacer></v-spacer>
                                         </v-card-actions>
                                     </v-card>
                                 </v-dialog>
                             </template>
-                            <template v-slot:[`item.actions`]="{ item }">
-                                <v-btn
-                                    class="mr-2"
-                                    color="secondary"
-                                    elevation="2"
-                                    fab
-                                    small
+                            <template v-slot:[`item.terminado`]="{ item }">
+                                <v-chip
+                                    :color="terminadoColor(item.terminado)"
+                                    dark
                                 >
-                                    <v-icon
-                                        color="primary"
+                                   {{ item.terminado == false ? 'No' : 'Si' }}
+                                </v-chip>
+                            </template>
+                            <template v-slot:[`item.actions`]="{ item }">
+                                <router-link :to="{name: 'editcourse', params: {id: item.id}}">
+                                    <v-btn
+                                        class="mr-2"
+                                        color="secondary"
+                                        elevation="2"
+                                        fab
                                         small
                                     >
-                                        mdi-pencil
-                                    </v-icon>
-                                </v-btn>
+                                        <v-icon
+                                            color="primary"
+                                            small
+                                        >
+                                            mdi-pencil
+                                        </v-icon>
+                                    </v-btn>
+                                </router-link>
                                 <v-btn
                                     color="red"
                                     dark
@@ -187,7 +201,7 @@
                                     <v-icon
                                         dark
                                         small
-                                        @click="deleteItem(item)"
+                                        @click="deleteCourse(item)"
                                     >
                                         mdi-trash-can-outline
                                     </v-icon>
@@ -212,11 +226,13 @@ export default {
     data: () => ({
         valid: false,
         alertError: false,
+        alertErrorMessage: '',
         alertSuccess: false,
         alertSuccessMessage: '',
         dialog: false,
         dialogDelete: false,
-        deleteCourse: null,
+        deleteCourseId: null,
+        terminadoText: '',
         headers: [
             { text: 'Curso', value: 'curso' },
             { text: 'Cupos', value: 'cupos' },
@@ -258,12 +274,9 @@ export default {
         ],
         descripcionRules: [
             v => !!v || 'La descripción es obligatoria',
-            v => (v && v.length >= 1) || 'La descripción debe al menos tener 30 caracteres',
+            v => (v && v.length >= 30) || 'La descripción debe al menos tener 30 caracteres',
         ],
         cuposRules: [ v => !!v || 'Los cupos son obligatorios' ],
-        inscritosRules: [ 
-            v => !!v || 'Los cupos son obligatorios'
-        ],
         duracionRules: [ v => !!v || 'La duración es obligatoria' ],
         costoRules: [ v => !!v || 'El costo es obligatorio' ]
         
@@ -295,6 +308,7 @@ export default {
             this.$refs.form.validate()
             if ( this.valid == false ) {
                 this.alertError = true
+                this.alertErrorMessage = 'Por favor ingresa todos los campos!'
             } else {
                 try {
                     await addDoc(collection(db, 'cursos'), this.newCourse)
@@ -308,21 +322,15 @@ export default {
             }
         },
 
-        editItem (item) {
-            this.editedIndex = this.desserts.indexOf(item)
-            this.editedItem = Object.assign({}, item)
-            this.dialog = true
-        },
-
-        deleteItem (item) {
+        deleteCourse (item) {
             let deleteCourseId = this.courses.find( course => course.id === item.id)
-            this.deleteCourse = deleteCourseId.id
+            this.deleteCourseId = deleteCourseId.id
             this.dialogDelete = true
         },
 
-        async deleteItemConfirm () {
+        async deleteCourseConfirm () {
             try {
-                await deleteDoc( doc(db, "cursos", this.deleteCourse))
+                await deleteDoc( doc(db, "cursos", this.deleteCourseId))
                 this.closeDelete()
                 this.alertSuccessMessage = "El usuario ha sido eliminado con éxito!"
                 this.alertSuccess = true
@@ -342,6 +350,20 @@ export default {
 
         closeDelete () {
             this.dialogDelete = false
+        },
+
+        ruleInscripcion() {
+            if ( this.newCourseField.inscritos > this.newCourseField.cupos ) {
+                return 'El numero de inscritos no puede ser mayor al de cupos'
+            }
+        },
+
+        terminadoColor(terminado) {
+            if ( terminado == false ) {
+                return 'green'
+            } else {
+                return 'red'
+            }
         },
     },
 }

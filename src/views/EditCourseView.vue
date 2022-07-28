@@ -1,16 +1,16 @@
 <template>
     <div>
-        <heading-section title="Administración de Cursos"></heading-section>
-        <courses-table></courses-table>
+        <heading-section title="Edición de curso"></heading-section>
+        <course-edition></course-edition>
     </div>
 </template>
 
 <script>
 import HeadingSection from '@/components/HeadingSection.vue'
-import CoursesTable from '@/components/CoursesTable.vue'
+import CourseEdition from '@/components/CourseEdition.vue'
 
 export default {
-    name: 'courses-view',
+    name: 'edit-course',
     // props: {},
     data: function(){
         return {}
@@ -20,7 +20,7 @@ export default {
     // watch: {},
     components: {
         'heading-section': HeadingSection,
-        'courses-table': CoursesTable
+        'course-edition': CourseEdition
     },
     // mixins: [],
     // filters: {},

@@ -47,6 +47,21 @@ body .theme--light.v-application {
 .register {
     height: 100%;
 }
+/** Login & Register Form */
+.login,
+.register {
+  background-image: url('./assets/img/login-bg.png');
+  background-size: cover;
+  background-position: center center;
+}
+.sign-link {
+  cursor: pointer;
+  transition: color 300ms ease-in-out;
+  &:hover {
+    color: #170035 !important;
+  }
+}
+
 /** Divider */
 .divider {
   background-color: $secondary-color;

@@ -1,6 +1,9 @@
 <template>
-    <v-card class="py-8 px-6">
-        <h2 class="text-h4 text-center">Login</h2>
+    <v-card 
+        class="form-card pa-5"
+        color="white"
+        elevation="20">
+        <h2 class="text-h4 text-center primary--text">Login</h2>
         <v-alert
             :value="alertError"
             color="red"
@@ -28,22 +31,25 @@
                 label="Contraseña"
                 required
                 append-icon="mdi-key-outline"
+                type="password"
             ></v-text-field>
 
-            <v-btn
-                color="success"
-                class="mr-4"
-                @click="login"
-            >
-                Ingresar
-            </v-btn>
+            <div cols="12" class="d-flex justify-center mt-5">
+                <v-btn
+                    depressed
+                    color="primary"
+                    dark
+                    @click="login"
+                >Ingresar</v-btn>
+            </div>
             <v-divider class="my-5"></v-divider>
-            <div class="log-link d-flex justify-center text-body-2 font-weight-light">
-                ¿Aun no tienes una cuenta?
-                <a 
-                    class="font-weight-medium ml-1"
-                    @click="toRegister"    
-                >Regístrate</a>
+            <div cols="12" class="d-flex justify-center">
+                <div class="text-caption primary--text">¿Aun no tiene una cuenta?</div>
+                <div 
+                    class="text-caption font-weight-bold primary--text ml-2 sign-link" 
+                    @click="toRegister">
+                    Regístrate
+                </div>
             </div>
         </v-form>
     </v-card>

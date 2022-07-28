@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import CoursesView from '@/views/CoursesView.vue'
+import EditCourseView from '@/views/EditCourseView.vue'
 import { getAuth } from 'firebase/auth'
 
 Vue.use(VueRouter)
@@ -31,6 +32,15 @@ const routes = [
     path: '/courses',
     name: 'courses',
     component: CoursesView,
+    meta: {
+      privateRoute: true
+    }
+  },
+  {
+    path: '/editcourse/:id',
+    name: 'editcourse',
+    component: EditCourseView,
+    props: true,
     meta: {
       privateRoute: true
     }
