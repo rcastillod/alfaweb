@@ -9,7 +9,9 @@
             <v-container>
                 <v-row align="center">
                     <div class="d-flex align-center">
-                        <a @click="toHome()">
+                        <a
+                            @click="toHome()"
+                        >
                             <v-img
                                 alt="Vuetify Logo" 
                                 class="shrink mr-2" 
@@ -96,7 +98,6 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
     name: 'nav-bar',
-    // props: {},
     data: function(){
         return {
             drawer: false,
@@ -121,7 +122,9 @@ export default {
             .catch((error) => console.log(error))
         },
         toHome() {
-            this.$router.push('/')
+            if ( this.$route.name !== 'home' ) {
+                this.$router.push('/')
+            }
         },
         redirectTo(nameRoute){
             this.$router.push({name:nameRoute})
@@ -131,12 +134,7 @@ export default {
         group () {
             this.drawer = false
         },
-    },
-    //components: {},
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
+    }
 }
 </script>
 

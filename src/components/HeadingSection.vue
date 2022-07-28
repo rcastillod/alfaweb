@@ -23,15 +23,7 @@ export default {
     },
     data: function(){
         return {}
-    },
-    // computed: {},
-    //methods: {}
-    // watch: {},
-    // components: {},
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
+    }
 }
 </script>
 

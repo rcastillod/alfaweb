@@ -60,7 +60,6 @@ import { mapActions } from 'vuex'
 
 export default {
     name: 'register-form',
-    // props: {},
     data: function(){
         return {
             valid: false,
@@ -78,7 +77,6 @@ export default {
             ],
         }
     },
-    // computed: {},
     methods: {
         ...mapActions(['registerAction']),
         register() {
@@ -95,12 +93,6 @@ export default {
             this.$router.push('/login')
         }
     }
-    // watch: {},
-    // components: {},
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
 }
 </script>
 

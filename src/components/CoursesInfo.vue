@@ -110,7 +110,6 @@ import { mapGetters } from 'vuex'
 
 export default {
     name: 'courses-info',
-    // props: {},
     data: function(){
         return {}
     },
@@ -127,13 +126,6 @@ export default {
             return restantes
         }
     },
-    //methods: {}
-    // watch: {},
-    // components: {},
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
 }
 </script>
 

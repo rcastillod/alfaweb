@@ -4,6 +4,16 @@
             <v-container>
                 <v-row justify="space-between">
                     <h3 class="text-h5 text-uppercase">Editando: {{nameCourse}}</h3>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="primary"
+                        @click="toCourses"
+                    >
+                    <v-icon left>
+                        mdi-arrow-left
+                    </v-icon>
+                    Volver a cursos
+                    </v-btn>
                 </v-row>
             </v-container>
         </div>
@@ -123,7 +133,6 @@ import { mapState } from 'vuex'
 
 export default {
     name: 'course-edition',
-    // props: {},
     data: function(){
         return {
             valid: false,
@@ -189,17 +198,14 @@ export default {
         ruleInscripcion() {
             if ( this.editedCourseField.inscritos > this.editedCourseField.cupos ) return 'El numero de inscritos no puede ser mayor al de cupos'
             return true
+        },
+        toCourses() {
+            this.$router.push('/courses')
         }
     },
-    // watch: {},
-    // components: {},
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
     created() {
         this.editedCourseField = this.course
     }
-    // -- End Lifecycle Methods
 }
 </script>
 

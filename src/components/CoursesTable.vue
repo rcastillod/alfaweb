@@ -29,7 +29,6 @@
                                     color="red"
                                     icon="mdi-alert-circle-outline"
                                     outlined
-                                    text
                                 >
                                     <div>{{alertErrorMessage}}</div>
                                 </v-alert>
@@ -112,15 +111,15 @@
                             <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn
-                                color="blue darken-1"
-                                text
+                                color="primary"
+                                outlined
                                 @click="close"
                             >
                                 Cancelar
                             </v-btn>
                             <v-btn
-                                color="blue darken-1"
-                                text
+                                color="primary"
+                                dark
                                 @click="addNewCourse"
                             >
                                 Guardar
@@ -159,8 +158,8 @@
                                         <v-card-title class="text-h6 text--primary text-center">¿Estas seguro que deseas eliminar este curso?</v-card-title>
                                         <v-card-actions>
                                             <v-spacer></v-spacer>
-                                            <v-btn color="blue darken-1" text @click="closeDelete">Cancelar</v-btn>
-                                            <v-btn color="blue darken-1" text @click="deleteCourseConfirm">Eliminar</v-btn>
+                                            <v-btn color="primary" outlined @click="closeDelete">Cancelar</v-btn>
+                                            <v-btn color="primary" @click="deleteCourseConfirm">Eliminar</v-btn>
                                             <v-spacer></v-spacer>
                                         </v-card-actions>
                                     </v-card>
@@ -174,7 +173,7 @@
                                    {{ item.terminado == false ? 'No' : 'Si' }}
                                 </v-chip>
                             </template>
-                            <template v-slot:[`item.actions`]="{ item }">
+                            <template v-slot:[`item.acciones`]="{ item }">
                                 <router-link :to="{name: 'editcourse', params: {id: item.id}}">
                                     <v-btn
                                         class="mr-2"
@@ -229,7 +228,6 @@ import { doc, collection, addDoc, deleteDoc } from "firebase/firestore";
 
 export default {
     name: 'courses-table',
-    // props: {},
     data: () => ({
         valid: false,
         alertError: false,
@@ -248,7 +246,7 @@ export default {
             { text: 'Costo', value: 'costo' },
             { text: 'Terminado', value: 'terminado' },
             { text: 'Fecha', value: 'fecha' },
-            { text: 'Actions', value: 'actions', sortable: false },
+            { text: 'Acciones', value: 'acciones', sortable: false },
         ],
         editedIndex: -1,
         newCourseField: {

@@ -15,20 +15,12 @@ import LoginForm from '@/components/LoginForm.vue'
 
 export default {
     name: 'login-view',
-    // props: {},
     data: function(){
         return {}
     },
-    // computed: {},
-    //methods: {}
-    // watch: {},
     components: {
         'login-form': LoginForm
-    },
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
+    }
 }
 </script>
 

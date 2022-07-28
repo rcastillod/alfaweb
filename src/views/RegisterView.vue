@@ -19,16 +19,9 @@ export default {
     data: function(){
         return {}
     },
-    // computed: {},
-    //methods: {}
-    // watch: {},
     components: {
         'register-form': RegisterForm
-    },
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
+    }
 }
 </script>
 

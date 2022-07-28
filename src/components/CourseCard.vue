@@ -118,19 +118,12 @@ export default {
             
         }
     },
-    // computed: {},
     methods: {
         reserve () {
             this.loading = true
             setTimeout(() => (this.loading = false), 2000)
         },
     }
-    // watch: {},
-    // components: {},
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
 }
 </script>
 

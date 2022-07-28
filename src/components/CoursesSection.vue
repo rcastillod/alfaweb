@@ -37,7 +37,6 @@ import CourseCard from '@/components/CourseCard.vue'
 
 export default {
     name: 'card-section',
-    // props: {},
     data: function(){
         return {
             
@@ -46,15 +45,9 @@ export default {
     computed: {
         ...mapState(['courses'])
     },
-    //methods: {}
-    // watch: {},
     components: {
         'course-card': CourseCard
-    },
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
+    }
 }
 </script>
 

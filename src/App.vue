@@ -38,8 +38,8 @@ export default {
 </script>
 
 <style lang="scss">
-body .theme--light.v-sheet,
-body .theme--light.v-application {
+body .theme--light.v-sheet:not(.v-alert),
+body .theme--light.v-application:not(.v-alert) {
   background-color: #F6FAFF;
   color: $text-color !important;
 }

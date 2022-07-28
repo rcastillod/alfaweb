@@ -61,7 +61,6 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
     name: 'login-form',
-    // props: {},
     data: function(){
         return {
             valid: false,
@@ -96,12 +95,6 @@ export default {
             this.$router.push('/register')
         }
     }
-    // watch: {},
-    // components: {},
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
 }
 </script>
 

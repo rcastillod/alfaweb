@@ -11,21 +11,13 @@ import CourseEdition from '@/components/CourseEdition.vue'
 
 export default {
     name: 'edit-course',
-    // props: {},
     data: function(){
         return {}
     },
-    // computed: {},
-    //methods: {}
-    // watch: {},
     components: {
         'heading-section': HeadingSection,
         'course-edition': CourseEdition
-    },
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
+    }
 }
 </script>
 
