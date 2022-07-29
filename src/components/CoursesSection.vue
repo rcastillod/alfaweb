@@ -2,7 +2,11 @@
     <section class="courses">
         <div class="heading-title py-5">
             <v-container>
-                <h3 class="text-h5 text-uppercase">Cursos Disponibles</h3>
+                <v-row>
+                    <v-col cols="12">
+                        <h3 class="text-h5 text-uppercase">Cursos Disponibles</h3>
+                    </v-col>
+                </v-row>
             </v-container>
         </div>
         <div class="courses-wrapper py-16">

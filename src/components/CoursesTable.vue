@@ -3,130 +3,132 @@
         <div class="heading-title py-5">
             <v-container>
                 <v-row justify="space-between">
-                    <h3 class="text-h5 text-uppercase">Listado de Cursos</h3>
-                    <v-dialog
-                        v-model="dialog"
-                        max-width="500px"
-                    >
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                                color="primary"
-                                dark
-                                class="mb-2"
-                                v-bind="attrs"
-                                v-on="on"
-                            >
-                                Agregar Curso
-                            </v-btn>
-                        </template>
-                        <v-card class="py-8">
-                            <v-card-title>
-                                <span class="text-h5 text--primary">Nuevo Curso</span>
-                            </v-card-title>
-                            <v-card-text>
-                                <v-alert
-                                    :value="alertError"
-                                    color="red"
-                                    icon="mdi-alert-circle-outline"
-                                    outlined
+                    <v-col cols="12" class="d-flex flex-column flex-sm-row justify-space-between">
+                        <h3 class="text-h5 text-uppercase">Listado de Cursos</h3>
+                        <v-dialog
+                            v-model="dialog"
+                            max-width="500px"
+                        >
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                    color="primary"
+                                    dark
+                                    class="mt-4 mt-sm-0 align-self-start"
+                                    v-bind="attrs"
+                                    v-on="on"
                                 >
-                                    <div>{{alertErrorMessage}}</div>
-                                </v-alert>
-                                <v-form
-                                    v-model="valid"
-                                    ref="form">
-                                    <v-container>
-                                        <v-row>
-                                            <v-col cols="12">
-                                                <v-text-field
-                                                    v-model="newCourseField.curso"
-                                                    :rules="courseRules"
-                                                    dense
-                                                    label="Curso"
-                                                    outlined
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12">
-                                                <v-text-field
-                                                    v-model="newCourseField.imagen"
-                                                    :rules="imagenRules"
-                                                    dense
-                                                    label="Imagen del Curso"
-                                                    outlined
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6">
-                                                <v-text-field
-                                                    v-model.number="newCourseField.cupos"
-                                                    :rules="cuposRules"
-                                                    dense
-                                                    label="Cupos"
-                                                    outlined
-                                                    min="0"
-                                                    type="number"
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6">
-                                                <v-text-field
-                                                    v-model.number="newCourseField.inscritos"
-                                                    :rules="[ruleInscripcion]"
-                                                    dense
-                                                    label="Inscritos"
-                                                    outlined
-                                                    min="0"
-                                                    type="number"
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6">
-                                                <v-text-field
-                                                    v-model="newCourseField.duracion"
-                                                    :rules="duracionRules"
-                                                    dense
-                                                    label="Duración"
-                                                    outlined
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12" sm="6">
-                                                <v-text-field
-                                                    v-model="newCourseField.costo"
-                                                    :rules="costoRules"
-                                                    dense
-                                                    label="Costo"
-                                                    outlined
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col cols="12">
-                                                <v-textarea
-                                                    v-model="newCourseField.descripcion"
-                                                    :rules="descripcionRules"
-                                                    dense
-                                                    label="Descripción"
-                                                    outlined
-                                                ></v-textarea>
-                                            </v-col>
-                                        </v-row>
-                                    </v-container>
-                                </v-form>
-                            </v-card-text>
-                            <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                color="primary"
-                                outlined
-                                @click="close"
-                            >
-                                Cancelar
-                            </v-btn>
-                            <v-btn
-                                color="primary"
-                                dark
-                                @click="addNewCourse"
-                            >
-                                Guardar
-                            </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
+                                    Agregar Curso
+                                </v-btn>
+                            </template>
+                            <v-card class="py-8">
+                                <v-card-title>
+                                    <span class="text-h5 text--primary">Nuevo Curso</span>
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-alert
+                                        :value="alertError"
+                                        color="red"
+                                        icon="mdi-alert-circle-outline"
+                                        outlined
+                                    >
+                                        <div>{{alertErrorMessage}}</div>
+                                    </v-alert>
+                                    <v-form
+                                        v-model="valid"
+                                        ref="form">
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12">
+                                                    <v-text-field
+                                                        v-model="newCourseField.curso"
+                                                        :rules="courseRules"
+                                                        dense
+                                                        label="Curso"
+                                                        outlined
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field
+                                                        v-model="newCourseField.imagen"
+                                                        :rules="imagenRules"
+                                                        dense
+                                                        label="Imagen del Curso"
+                                                        outlined
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="6">
+                                                    <v-text-field
+                                                        v-model.number="newCourseField.cupos"
+                                                        :rules="cuposRules"
+                                                        dense
+                                                        label="Cupos"
+                                                        outlined
+                                                        min="0"
+                                                        type="number"
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="6">
+                                                    <v-text-field
+                                                        v-model.number="newCourseField.inscritos"
+                                                        :rules="[ruleInscripcion]"
+                                                        dense
+                                                        label="Inscritos"
+                                                        outlined
+                                                        min="0"
+                                                        type="number"
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="6">
+                                                    <v-text-field
+                                                        v-model="newCourseField.duracion"
+                                                        :rules="duracionRules"
+                                                        dense
+                                                        label="Duración"
+                                                        outlined
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="6">
+                                                    <v-text-field
+                                                        v-model="newCourseField.costo"
+                                                        :rules="costoRules"
+                                                        dense
+                                                        label="Costo"
+                                                        outlined
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-textarea
+                                                        v-model="newCourseField.descripcion"
+                                                        :rules="descripcionRules"
+                                                        dense
+                                                        label="Descripción"
+                                                        outlined
+                                                    ></v-textarea>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                    </v-form>
+                                </v-card-text>
+                                <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                    color="primary"
+                                    outlined
+                                    @click="close"
+                                >
+                                    Cancelar
+                                </v-btn>
+                                <v-btn
+                                    color="primary"
+                                    dark
+                                    @click="addNewCourse"
+                                >
+                                    Guardar
+                                </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-col>
                 </v-row>
             </v-container>
         </div>
@@ -170,7 +172,7 @@
                                     :color="terminadoColor(item.terminado)"
                                     dark
                                 >
-                                   {{ item.terminado == false ? 'No' : 'Si' }}
+                                    {{ item.terminado == false ? 'No' : 'Si' }}
                                 </v-chip>
                             </template>
                             <template v-slot:[`item.acciones`]="{ item }">
@@ -248,7 +250,6 @@ export default {
             { text: 'Fecha', value: 'fecha' },
             { text: 'Acciones', value: 'acciones', sortable: false },
         ],
-        editedIndex: -1,
         newCourseField: {
             curso: null,
             imagen: null,
@@ -322,7 +323,8 @@ export default {
                     await addDoc(collection(db, 'cursos'), this.newCourse)
                     this.close()
                     this.alertSuccess = true,
-                    this.alertSuccessMessage = 'El curso se ha agregado con exito!'
+                    this.alertSuccessMessage = 'El curso se ha agregado con éxito!'
+                    this.fetchCoursesAction()
                 }
                 catch(error) {
                     console.log(error)
@@ -340,8 +342,9 @@ export default {
             try {
                 await deleteDoc( doc(db, "cursos", this.deleteCourseId))
                 this.closeDelete()
-                this.alertSuccessMessage = "El usuario ha sido eliminado con éxito!"
+                this.alertSuccessMessage = "El curso ha sido eliminado con éxito!"
                 this.alertSuccess = true
+                this.fetchCoursesAction()
             }
             catch(error) {
                 console.log(error)

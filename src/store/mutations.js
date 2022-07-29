@@ -25,6 +25,10 @@ const mutations = {
             fecha: course.data().fecha,
         })
         state.loader = false
+    },
+
+    SET_COURSES_ERROR(state, payload) {
+        state.coursesError = payload
     }
 
 }

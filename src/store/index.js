@@ -19,11 +19,12 @@ export default new Vuex.Store({
     user: null,
     userError: null,
     courses: [],
+    coursesError: null,
     loader: true
   },
-  getters: getters,
-  mutations: mutations,
-  actions: actions,
+  getters,
+  mutations,
+  actions,
   modules: {
   },
   plugins: [vuexLocalStorage.plugin]

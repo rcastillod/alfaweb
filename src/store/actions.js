@@ -1,34 +1,21 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from  '@/firebase/firebase.js'
 
 const actions = {
     
-    async registerAction({commit}, userData) {    
-        try{
-            const auth =  getAuth()
-            let respReg = await createUserWithEmailAndPassword(auth, userData.correo, userData.password)
-            commit('SET_USER', respReg)
-        }
-        catch(error) {
-            commit('SET_USER_ERROR', error.message)
-        }
-        
+    registerAction({commit}, userData) {    
+        commit('SET_USER', userData)
     },
-    async loginAction({commit}, userData) {
-        try {
-            const auth =  getAuth()
-            let respLog = await signInWithEmailAndPassword(auth, userData.correo, userData.password)
-            commit('SET_USER', respLog)
-        }
-        catch(error) {
-            commit('SET_USER_ERROR', error.message)
-        }
+
+    loginAction({commit}, userData) {
+        commit('SET_USER', userData)
     },
+
     async logoutAction({commit}) {
+        const auth =  getAuth()
         try {
-            const auth =  getAuth()
-            signOut(auth)
+            await signOut(auth)
             commit('SET_USER', null)
         }
         catch(error) {
@@ -45,7 +32,7 @@ const actions = {
             })
         }
         catch(error) {
-            console.log(error)
+            commit('SET_COURSE_ERROR', error.message)
         }
     }
 

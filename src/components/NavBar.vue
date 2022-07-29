@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <v-app-bar
             app
             color="white"
@@ -25,7 +24,7 @@
                     <v-spacer></v-spacer>
                     
                     <v-avatar 
-                        class="mr-3"
+                        class="mr-3 d-none d-sm-flex"
                         size="30">
                         <img
                             src="https://picsum.photos/id/1005/30/30"
@@ -33,8 +32,10 @@
                         >
                     </v-avatar>
                     <div class="text-body">
-                        Bienvenido 
-                        <span class="font-weight-bold accent--text mr-3">{{ getUserEmail }}</span></div>
+                        <div class="d-none d-sm-flex">
+                            Bienvenido 
+                            <span class="font-weight-bold accent--text ml-2 mr-3">{{ getUserEmail }}</span></div>
+                        </div>
                         <v-app-bar-nav-icon 
                             @click.stop="drawer = !drawer"
                             color="primary"></v-app-bar-nav-icon>
@@ -43,6 +44,7 @@
         </v-app-bar>
         <v-navigation-drawer 
             v-model="drawer"
+            color="#F6FAFF"
             fixed 
             right 
             temporary>

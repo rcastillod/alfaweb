@@ -1,6 +1,6 @@
 <template>
     <v-card
-        class="course-card mx-auto my-12"
+        class="course-card mx-auto"
         elevation="0"
         max-width="374"
     >
@@ -118,12 +118,7 @@ export default {
             
         }
     },
-    methods: {
-        reserve () {
-            this.loading = true
-            setTimeout(() => (this.loading = false), 2000)
-        },
-    }
+    methods: {}
 }
 </script>
 

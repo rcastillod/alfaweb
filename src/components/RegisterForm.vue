@@ -57,6 +57,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
     name: 'register-form',
@@ -79,14 +80,23 @@ export default {
     },
     methods: {
         ...mapActions(['registerAction']),
-        register() {
+        async register() {
             this.$refs.form.validate()
             if( this.valid == false ) {
                 this.alertError = true
                 this.alertMessage = 'Por favor ingresa todos los campos'
             } else {
-                this.registerAction({correo: this.correo, password: this.password})
-                .then(() => this.$router.push('/'))
+                try {
+                    const auth = getAuth()
+                    let reg = await createUserWithEmailAndPassword(auth, this.correo, this.password)
+                    this.registerAction(reg)
+                    this.$router.push('/')
+                }
+                catch(error) {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode, errorMessage)
+                }
             }
         },
         toLogin() {

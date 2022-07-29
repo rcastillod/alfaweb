@@ -58,6 +58,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
     name: 'login-form',
@@ -81,14 +82,28 @@ export default {
     computed: { ...mapState(['userError']) },
     methods: {
         ...mapActions(['loginAction']),
-        login() {
+        async login() {
             this.$refs.form.validate()
             if( this.valid == false ) {
                 this.alertError = true
                 this.alertMessage = 'Por favor ingresa todos los campos'
             } else {
-                this.loginAction({correo: this.correo, password: this.password})
-                .then(() => this.$router.push('/'))
+                // this.loginAction({correo: this.correo, password: this.password})
+                // .then(() => this.$router.push('/'))
+                this.alertError = false
+                const auth = getAuth()
+                try {
+                    let log = await signInWithEmailAndPassword(auth, this.correo, this.password)
+                    this.loginAction(log)
+                    this.$router.push('/')
+                }
+                catch(error) {
+                    const errorCode = error.code
+                    const errorMessage = error.message
+                    console.log(errorCode, errorMessage)
+                    this.alertError = true
+                    this.alertMessage = "Tu usuario o contraseña son incorrectos."
+                }
             }
         },
         toRegister() {

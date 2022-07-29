@@ -10,6 +10,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import NavBar from './components/NavBar.vue';
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 
 export default {
   name: 'App',
@@ -30,9 +31,15 @@ export default {
     'nav-bar': NavBar
   },
   created() {
-      if ( this.user != null ) {
-        this.fetchCoursesAction()
-      }
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {  
+        if (user) {      
+          this.fetchCoursesAction()
+        }
+      })
+        // ...  } else {    // User is signed out    // ...  }});
+      // if ( this.user != null ) {
+      // }
     }
 };
 </script>

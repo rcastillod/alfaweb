@@ -3,17 +3,19 @@
         <div class="heading-title py-5">
             <v-container>
                 <v-row justify="space-between">
-                    <h3 class="text-h5 text-uppercase">Editando: {{nameCourse}}</h3>
-                    <v-spacer></v-spacer>
-                    <v-btn
-                        color="primary"
-                        @click="toCourses"
-                    >
-                    <v-icon left>
-                        mdi-arrow-left
-                    </v-icon>
-                    Volver a cursos
-                    </v-btn>
+                    <v-col cols="12" class="d-flex flex-column flex-sm-row justify-space-between">
+                        <h3 class="text-h5 text-uppercase">Editando: {{nameCourse}}</h3>
+                        <v-btn
+                            color="primary"
+                            class="mt-4 mt-sm-0 align-self-start"
+                            @click="toCourses"
+                        >
+                            <v-icon left>
+                                mdi-arrow-left
+                            </v-icon>
+                        Volver a cursos
+                        </v-btn>
+                    </v-col>
                 </v-row>
             </v-container>
         </div>
@@ -25,13 +27,14 @@
                         ref="form">
                         <v-container>
                             <v-alert
-                                :value="alertError"
-                                color="red"
-                                icon="mdi-alert-circle-outline"
+                                :value="alert"
+                                :color="alertColor"
+                                :icon="alertIcon"
+                                class="mb-15"
                                 outlined
                                 text
                             >
-                                <div>{{alertErrorMessage}}</div>
+                                <div>{{alertMessage}}</div>
                             </v-alert>
                             <v-row>
                                 <v-col cols="12">
@@ -128,7 +131,7 @@
 
 <script>
 import { db } from  '@/firebase/firebase.js'
-import { doc, setDoc } from "firebase/firestore"
+import { doc, setDoc, getDoc } from "firebase/firestore"
 import { mapState } from 'vuex'
 
 export default {
@@ -136,20 +139,22 @@ export default {
     data: function(){
         return {
             valid: false,
-            alertError: false,
-            alertErrorMessage: '',
+            alert: false,
+            alertMessage: '',
+            alertIcon: 'mdi',
+            alertColor: '',
             courseId: this.$route.params.id,
             editedCourseResponse: '',
             editedCourseField: {
-                curso: null,
-                imagen: null,
-                cupos: null,
-                inscritos: null,
-                duracion: null,
-                costo: null,
-                descripcion: null,
+                curso: '',
+                imagen: '',
+                cupos: '',
+                inscritos: '',
+                duracion: '',
+                costo: '',
+                descripcion: '',
                 terminado: false,
-                fecha: null,
+                fecha: '',
             },
             courseRules: [
                 v => !!v || 'El nombre es obligatorio',
@@ -172,28 +177,39 @@ export default {
         ...mapState(['courses']),
         course() {
             return this.courses.find( (course) => course.id === this.courseId )
-            
         },
         nameCourse() {
-            return this.editedCourseField.curso
+            if ( this.editedCourseField != undefined ) {
+                return this.editedCourseField.curso
+            }
+            return ''
         }
     },
     methods: {
         async editCourse() {
             this.$refs.form.validate()
             if ( this.valid == false ) {
-                this.alertError = true
-                this.alertErrorMessage = 'Por favor corrige los errores'
+                this.alert = true
+                this.alertMessage = 'Por favor corrige los errores'
+                this.alertIcon = 'mdi-alert-circle-outline'
+                this.alertColor = 'red'
             } else {
                 try {
                     await setDoc(doc(db, 'cursos', this.courseId), this.editedCourseField)
-                    this.editedCourseResponse = 'success'
-                    this.$router.push({name: 'courses'})
+                    this.alert = true
+                    this.alertMessage = 'El curso ha sido editado con éxito'
+                    this.alertIcon = 'mdi-alert-circle-outline'
+                    this.alertColor = 'green'
                 }
                 catch(error) {
-                    this.editedCourseResponse = error
+                    console.log(error)
                 }
             }
+        },
+        async fetchCourseById() {
+            const docRef = doc(db, 'cursos', this.courseId)
+            let response = await getDoc(docRef)
+            this.editedCourseField = response.data()
         },
         ruleInscripcion() {
             if ( this.editedCourseField.inscritos > this.editedCourseField.cupos ) return 'El numero de inscritos no puede ser mayor al de cupos'
@@ -201,6 +217,15 @@ export default {
         },
         toCourses() {
             this.$router.push('/courses')
+        }
+    },
+    watch: {
+        course(value) {
+            if ( value == undefined ) {
+                this.fetchCourseById()
+            } else {
+                this.editedCourseField = value
+            }
         }
     },
     created() {
